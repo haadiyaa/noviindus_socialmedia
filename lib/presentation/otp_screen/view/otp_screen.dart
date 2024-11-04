@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:noviindus_machinetest/core/constants.dart';
-import 'package:noviindus_machinetest/repository/home_screen/view/home_screen.dart';
-import 'package:noviindus_machinetest/repository/otp_screen/widgets/customtextfield.dart';
+import 'package:noviindus_machinetest/presentation/home_screen/view/home_screen.dart';
+import 'package:noviindus_machinetest/presentation/otp_screen/widgets/customtextfield.dart';
+import 'package:noviindus_machinetest/providers/authprovider.dart';
+import 'package:provider/provider.dart';
 
 class OtpScreen extends StatelessWidget {
   OtpScreen({super.key});
@@ -79,13 +81,33 @@ class OtpScreen extends StatelessWidget {
                           horizontal: 15,
                           vertical: 10,
                         ),
-                        backgroundColor: Constants.grey,
+                        backgroundColor: const Color.fromARGB(255, 53, 53, 53),
                         foregroundColor: Constants.white,
                       ),
                       onPressed: () {
                         if (globalKey.currentState!.validate()) {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (_) => HomeScreen()));
+                          final provider =
+                              Provider.of<Authprovider>(context, listen: false);
+                          provider
+                              .otpVerify(
+                                  code: country.text.trim(),
+                                  phone: phone.text.trim())
+                              .then(
+                            (value) {
+                              if (provider.msg == 'Login Success!') {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => HomeScreen()));
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(provider.msg)));
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(provider.msg)));
+                              }
+                            },
+                          );
+                          //
                         }
                       },
                       child: Row(

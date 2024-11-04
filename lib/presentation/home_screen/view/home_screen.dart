@@ -17,15 +17,16 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(
                   color: Constants.white, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(
+            SizedBox(
               height: 10,
             ),
             Text(
               'Welcome back to Section',
               style: TextStyle(
-                  color: Constants.white,
-                  fontWeight: FontWeight.w300,
-                  fontSize: 14),
+                color: Constants.white,
+                fontWeight: FontWeight.w300,
+                fontSize: 16,
+              ),
             ),
           ],
         ),
