@@ -17,4 +17,10 @@ class ApiRepository {
     http.Response httpResponse = await http.Response.fromStream(response);
     return httpResponse;
   }
+
+  static Future<http.Response> home() async {
+    final response =
+        await http.get(Uri.parse('${Apikeys.base}${Apikeys.home}'));
+    return response;
+  }
 }

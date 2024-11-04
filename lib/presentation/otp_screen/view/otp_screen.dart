@@ -86,6 +86,8 @@ class OtpScreen extends StatelessWidget {
                       ),
                       onPressed: () {
                         if (globalKey.currentState!.validate()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Please wait..')));
                           final provider =
                               Provider.of<Authprovider>(context, listen: false);
                           provider
