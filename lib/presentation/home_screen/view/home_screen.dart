@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:noviindus_machinetest/core/constants.dart';
+import 'package:noviindus_machinetest/presentation/add_feed_screen/view/addfeedscreen.dart';
 import 'package:noviindus_machinetest/presentation/home_screen/widgets/filterwidget.dart';
 import 'package:noviindus_machinetest/presentation/home_screen/widgets/postwidget.dart';
 import 'package:noviindus_machinetest/presentation/home_screen/widgets/postwidgetloading.dart';
@@ -28,7 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
         backgroundColor: Constants.red,
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => AddFeedScreen()));
+        },
         child: const Icon(
           Icons.add,
           color: Constants.white,
